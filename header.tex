@@ -1,0 +1,290 @@
+\documentclass{article}
+
+% Packages and formatting
+
+% Packages
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[UKenglish]{babel}
+\usepackage{commath}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{tikz-cd}
+\usepackage{csquotes}
+
+% Formatting
+\setlength{\parindent}{0cm}
+\addto\captionsUKenglish{\renewcommand{\abstractname}{Syllabus}}
+\delimitershortfall5pt
+\ifx\thm\undefined\newtheorem{n}{}\else\newtheorem{n}{}[\thm]\fi
+
+% Environments
+
+% Plain environments
+\theoremstyle{plain}
+\newtheorem{algorithm}[n]{Algorithm}
+\newtheorem*{algorithm*}{Algorithm}
+\newtheorem{conjecture}[n]{Conjecture}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem{corollary}[n]{Corollary}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem{lemma}[n]{Lemma}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{proposition}[n]{Proposition}
+\newtheorem*{proposition*}{Proposition}
+\newtheorem{theorem}[n]{Theorem}
+\newtheorem*{theorem*}{Theorem}
+
+% Definition environments
+\theoremstyle{definition}
+\newtheorem{aim}[n]{Aim}
+\newtheorem*{aim*}{Aim}
+\newtheorem{axiom}[n]{Axiom}
+\newtheorem*{axiom*}{Axiom}
+\newtheorem{condition}[n]{Condition}
+\newtheorem*{condition*}{Condition}
+\newtheorem{definition}[n]{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheorem{example}[n]{Example}
+\newtheorem*{example*}{Example}
+\newtheorem{exercise}[n]{Exercise}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem{fact}[n]{Fact}
+\newtheorem*{fact*}{Fact}
+\newtheorem{goal}[n]{Goal}
+\newtheorem*{goal*}{Goal}
+\newtheorem{law}[n]{Law}
+\newtheorem*{law*}{Law}
+\newtheorem{plan}[n]{Plan}
+\newtheorem*{plan*}{Plan}
+\newtheorem{problem}[n]{Problem}
+\newtheorem*{problem*}{Problem}
+\newtheorem{question}[n]{Question}
+\newtheorem*{question*}{Question}
+\newtheorem{warning}[n]{Warning}
+\newtheorem*{warning*}{Warning}
+
+% Remark environments
+\theoremstyle{remark}
+\newtheorem{acknowledgements}[n]{Acknowledgements}
+\newtheorem*{acknowledgements*}{Acknowledgements}
+\newtheorem{annotations}[n]{Annotations}
+\newtheorem*{annotations*}{Annotations}
+\newtheorem{assumption}[n]{Assumption}
+\newtheorem*{assumption*}{Assumption}
+\newtheorem{conclusion}[n]{Conclusion}
+\newtheorem*{conclusion*}{Conclusion}
+\newtheorem{claim}[n]{Claim}
+\newtheorem*{claim*}{Claim}
+\newtheorem{notation}[n]{Notation}
+\newtheorem*{notation*}{Notation}
+\newtheorem{note}[n]{Note}
+\newtheorem*{note*}{Note}
+\newtheorem{remark}[n]{Remark}
+\newtheorem*{remark*}{Remark}
+
+% General commands
+
+% Lecture
+\newcommand{\lecture}[3]{
+  \marginpar{
+    Lecture #1 \\
+    #2 \\
+    #3
+  }
+}
+
+% Brackets
+\renewcommand{\eval}[1]{\left. #1 \right|}          % Evaluation
+\newcommand{\br}{\del}                              % Brackets
+\newcommand{\abr}[1]{\left\langle #1 \right\rangle} % Angle brackets
+\newcommand{\fbr}[1]{\left\lfloor #1 \right\rfloor} % Floor brackets
+\newcommand{\lbr}[1]{\left\lfloor #1 \right\rfloor} % Ceiling brackets
+
+% Function
+\newcommand{\function}[5][]{
+  \ifx &#1&
+    \begin{array}{rcl}
+      #2 & \longrightarrow & #3 \\
+      #4 & \longmapsto     & #5
+    \end{array}
+  \else
+    \fullfunction{#1}{#2}{#3}{#4}{#5}
+  \fi
+}
+
+% Spaces
+\newcommand{\F}{\mathbb{F}}   % Finite fields
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integral numbers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\C}{\mathbb{C}}   % Complex numbers
+\renewcommand{\H}{\mathbb{H}} % Quaternion numbers
+\newcommand{\A}{\mathbb{A}}   % Affine spaces
+\renewcommand{\P}{\mathbb{P}} % Projective spaces
+
+% Correspondence
+\newcommand{\correspondence}[2]{
+  \cbr{
+    \begin{array}{c}
+      #1
+    \end{array}
+  }
+  \qquad
+  \leftrightsquigarrow
+  \qquad
+  \cbr{
+    \begin{array}{c}
+      #2
+    \end{array}
+  }
+}
+
+% Integrals
+\newcommand{\intd}[4]{\int_{#1}^{#2} \, #3 \, \dif #4}
+\newcommand{\iintd}[4]{\iint_{#1} \, #2 \, \dif #3 \, \dif #4}
+\newcommand{\iiintd}[5]{\iiint_{#1} \, #2 \, \dif #3 \, \dif #4 \, \dif #5}
+
+% Matrices
+\newcommand{\onebytwo}[2]{
+  \begin{pmatrix}
+    #1 & #2
+  \end{pmatrix}
+}
+\newcommand{\onebythree}[3]{
+  \begin{pmatrix}
+    #1 & #2 & #3
+  \end{pmatrix}
+}
+\newcommand{\twobyone}[2]{
+  \begin{pmatrix}
+    #1 \\
+    #2
+  \end{pmatrix}
+}
+\newcommand{\twobytwo}[4]{
+  \begin{pmatrix}
+    #1 & #2 \\
+    #3 & #4
+  \end{pmatrix}
+}
+\newcommand{\threebyone}[3]{
+  \begin{pmatrix}
+    #1 \\
+    #2 \\
+    #3
+  \end{pmatrix}
+}
+\newcommand{\threebythree}[9]{
+  \begin{pmatrix}
+    #1 & #2 & #3 \\
+    #4 & #5 & #6 \\
+    #7 & #8 & #9
+  \end{pmatrix}
+}
+
+% Frakturs
+\renewcommand{\aa}{\mathfrak{a}} % Fraktur a
+\newcommand{\bb}{\mathfrak{b}}   % Fraktur b
+\newcommand{\cc}{\mathfrak{c}}   % Fraktur c
+\newcommand{\dd}{\mathfrak{d}}   % Fraktur d
+\newcommand{\ee}{\mathfrak{e}}   % Fraktur e
+\newcommand{\ff}{\mathfrak{f}}   % Fraktur f
+\newcommand{\g}{\mathfrak{g}}    % Fraktur g
+\newcommand{\hh}{\mathfrak{h}}   % Fraktur h
+\newcommand{\ii}{\mathfrak{i}}   % Fraktur i
+\newcommand{\jj}{\mathfrak{j}}   % Fraktur j
+\newcommand{\kk}{\mathfrak{k}}   % Fraktur k
+\renewcommand{\l}{\mathfrak{l}}  % Fraktur l
+\newcommand{\mm}{\mathfrak{m}}   % Fraktur m
+\newcommand{\nn}{\mathfrak{n}}   % Fraktur n
+\newcommand{\oo}{\mathfrak{o}}   % Fraktur o
+\newcommand{\pp}{\mathfrak{p}}   % Fraktur p
+\newcommand{\qq}{\mathfrak{q}}   % Fraktur q
+\newcommand{\rr}{\mathfrak{r}}   % Fraktur r
+\renewcommand{\ss}{\mathfrak{s}} % Fraktur s
+\renewcommand{\tt}{\mathfrak{t}} % Fraktur t
+\newcommand{\uu}{\mathfrak{u}}   % Fraktur u
+\newcommand{\vv}{\mathfrak{v}}   % Fraktur v
+\newcommand{\ww}{\mathfrak{w}}   % Fraktur w
+\newcommand{\xx}{\mathfrak{x}}   % Fraktur x
+\newcommand{\yy}{\mathfrak{y}}   % Fraktur y
+\newcommand{\zz}{\mathfrak{z}}   % Fraktur z
+
+% Calligraphics
+\renewcommand{\AA}{\mathcal{A}} % Calligraphic A
+\newcommand{\BB}{\mathcal{B}}   % Calligraphic B
+\newcommand{\CC}{\mathcal{C}}   % Calligraphic C
+\newcommand{\DD}{\mathcal{D}}   % Calligraphic D
+\newcommand{\EE}{\mathcal{E}}   % Calligraphic E
+\newcommand{\FF}{\mathcal{F}}   % Calligraphic F
+\newcommand{\GG}{\mathcal{G}}   % Calligraphic G
+\newcommand{\HH}{\mathcal{H}}   % Calligraphic H
+\newcommand{\II}{\mathcal{I}}   % Calligraphic I
+\newcommand{\JJ}{\mathcal{J}}   % Calligraphic J
+\newcommand{\KK}{\mathcal{K}}   % Calligraphic K
+\newcommand{\LL}{\mathcal{L}}   % Calligraphic L
+\newcommand{\MM}{\mathcal{M}}   % Calligraphic M
+\newcommand{\NN}{\mathcal{N}}   % Calligraphic N
+\newcommand{\OO}{\mathcal{O}}   % Calligraphic O
+\newcommand{\PP}{\mathcal{P}}   % Calligraphic P
+\newcommand{\QQ}{\mathcal{Q}}   % Calligraphic Q
+\newcommand{\RR}{\mathcal{R}}   % Calligraphic R
+\renewcommand{\SS}{\mathcal{S}} % Calligraphic S
+\newcommand{\TT}{\mathcal{T}}   % Calligraphic T
+\newcommand{\UU}{\mathcal{U}}   % Calligraphic U
+\newcommand{\VV}{\mathcal{V}}   % Calligraphic V
+\newcommand{\WW}{\mathcal{W}}   % Calligraphic W
+\newcommand{\XX}{\mathcal{X}}   % Calligraphic X
+\newcommand{\YY}{\mathcal{Y}}   % Calligraphic Y
+\newcommand{\ZZ}{\mathcal{Z}}   % Calligraphic Z
+
+% Tikz
+\tikzset{
+  arrow symbol/.style={"#1" description, allow upside down, auto=false, draw=none, sloped},
+  subset/.style={arrow symbol={\subset}},
+  cong/.style={arrow symbol={\cong}}
+}
+
+% Specific commands
+
+% Logic
+\newcommand{\notb}[1]{\br{\neg #1}}               % Negation
+\newcommand{\orb}[2]{\br{#1 \lor #2}}             % Disjunction
+\newcommand{\andb}[2]{\br{#1 \land #2}}           % Conjunction
+\newcommand{\impb}[2]{\br{#1 \rightarrow #2}}     % Implication
+\newcommand{\iffb}[2]{\br{#1 \leftrightarrow #2}} % Biconditional
+\newcommand{\fab}[1]{\br{\forall #1}}             % Universal quantifier
+\newcommand{\teb}[1]{\br{\exists #1}}             % Existential quantifier
+\newcommand{\eqb}[2]{\br{#1 = #2}}                % Equal to
+\newcommand{\ltb}[2]{\br{#1 < #2}}                % Less than
+\newcommand{\leb}[2]{\br{#1 \le #2}}              % Less than or equal to
+\newcommand{\neb}[2]{\br{#1 \ne #2}}              % Not equal to
+\newcommand{\inb}[2]{\br{#1 \in #2}}              % An element of
+\newcommand{\nib}[2]{\br{#1 \notin #2}}           % Not an element of
+\newcommand{\subb}[2]{\br{#1 \subseteq #2}}       % Subset of
+
+% Number theory
+\newcommand{\jacobi}[2]{\br{\tfrac{#1}{#2}}}        % Jacobi symbol
+\newcommand{\Unit}[1]{\br{\dfrac{\Z}{#1\Z}}^\times} % Unit group vertical
+\newcommand{\unit}[1]{\br{\Z / #1\Z}^\times}        % Unit group horizontal
+
+% Front matter
+
+% Fancy header
+\pagestyle{fancy}
+\lhead{\module}
+\rhead{\nouppercase{\leftmark}}
+
+% Make title
+\title{\module}
+\author{Lectured by \lecturer \\ Typed by \typist}
+\date{\term}
